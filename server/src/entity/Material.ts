@@ -14,17 +14,17 @@ export class Material {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ type: "varchar" })
     name: string;
 
-    @Column()
+    @Column({ type: "varchar" })
     description: string;
 
     @ManyToMany(() => Location, (locations) => locations.materials)
     @JoinTable()
     sources: Location[];
 
-    @Column()
+    @Column({ type: "varchar" })
     image: string;
 
     @ManyToMany(() => Book, (book) => book.materials)
