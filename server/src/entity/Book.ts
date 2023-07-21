@@ -16,7 +16,7 @@ export class Book {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: "varchar" })
   name: string;
 
   @ManyToOne(() => Character, character => character.booksWritten)

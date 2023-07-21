@@ -16,31 +16,31 @@ export class Character {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: "varchar" })
   name: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   gender: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   yearsLived: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   role: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   nameMeaning: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   married: boolean;
 
-  @Column()
+  @Column({ type: "varchar" })
   image: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   otherNames: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: "number" })
   fatherId: number;
 
   @ManyToOne(() => Character)
@@ -50,7 +50,7 @@ export class Character {
   @OneToMany(() => Character, character => character.father)
   childrenFromFather: Character[];
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: "number" })
   motherId: number;
 
   @ManyToOne(() => Character)
@@ -64,7 +64,7 @@ export class Character {
   @JoinTable()
   siblings: Character[];
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: "number" })
   spouseId: number;
 
   @ManyToOne(() => Character, character => character.spouse)

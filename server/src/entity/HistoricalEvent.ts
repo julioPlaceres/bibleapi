@@ -13,16 +13,16 @@ export class HistoricalEvent {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: "varchar" })
   name: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   dateTime: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   description: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   image: string;
 
   @ManyToMany(() => Character, (character) => character.historicalEvents)

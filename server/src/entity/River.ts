@@ -14,13 +14,13 @@ export class River {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ type: "varchar" })
     name: string;
 
-    @Column()
+    @Column({ type: "varchar" })
     description: string;
 
-    @Column()
+    @Column({ type: "varchar" })
     image: string;
 
     @ManyToMany(() => Location, (locations) => locations.rivers)

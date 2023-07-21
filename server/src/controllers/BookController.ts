@@ -1,4 +1,3 @@
-// controllers/BooksController.ts
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { Book } from '../entity/Book';
