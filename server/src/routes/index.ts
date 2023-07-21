@@ -1,10 +1,10 @@
 import { Express } from 'express';
 import booksRoute from './bookRoutes';
+import eventsRoute from './eventRoutes';
 // import charactersRoute from './characterRoutes';
-// import historicalEventsRoute from './historicalEventRoutes';
 
 export default (app: Express) => {
     app.use('/books', booksRoute);
+    app.use('/events', eventsRoute);
     // app.use('/characters', charactersRoute);
-    // app.use('/events', historicalEventsRoute);
 };
