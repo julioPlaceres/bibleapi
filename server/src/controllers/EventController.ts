@@ -5,10 +5,12 @@ import { Character } from '../entity/Character';
 import { HistoricalEvent } from '../entity/HistoricalEvent';
 import { Location } from '../entity/Location';
 
+const joinRelations = ['characters', 'locations', 'bookReferences'];
+
 // Get all
 export const getEvents = async (req: Request, res: Response) => {
     const eventsRepository = getRepository(HistoricalEvent);
-    const historicalEvents = await eventsRepository.find();
+    const historicalEvents = await eventsRepository.find({ relations: joinRelations });
     res.json(historicalEvents);
 };
 
@@ -23,7 +25,7 @@ export const getEvent = async (req: Request, res: Response) => {
         return res.status(400).json({ message: 'Invalid Event id' });
     }
 
-    const historicalEvent = await eventsRepository.findOne({ where: { id: idNumber } });
+    const historicalEvent = await eventsRepository.findOne({ where: { id: idNumber }, relations: joinRelations });
 
     if (!historicalEvent) {
         return res.status(404).json({ message: 'Event not found' });
@@ -137,7 +139,7 @@ export const updateEvent = async (req: Request, res: Response) => {
         const characterEntities = [];
 
         for (const characterId of characters) {
-            const characterEntity = await characterRepository.findOne(characterId);
+            const characterEntity = await characterRepository.findOne({ where: { id: characterId } });
 
             if (!characterEntity) {
                 return res.status(404).json({ message: `Character id ${characterId} not found` });
@@ -152,7 +154,7 @@ export const updateEvent = async (req: Request, res: Response) => {
         const locationEntities = [];
 
         for (const locationId of locations) {
-            const locationEntity = await locationRepository.findOne(locationId);
+            const locationEntity = await locationRepository.findOne({ where: { id: locationId } });
 
             if (!locationEntity) {
                 return res.status(404).json({ message: `Location id ${locationId} not found` });
@@ -167,7 +169,7 @@ export const updateEvent = async (req: Request, res: Response) => {
         const bookEntities = [];
 
         for (const bookId of bookReferences) {
-            const bookEntity = await bookRepository.findOne(bookId);
+            const bookEntity = await bookRepository.findOne({ where: { id: bookId } });
 
             if (!bookEntity) {
                 return res.status(404).json({ message: `Book id ${bookId} not found` });
