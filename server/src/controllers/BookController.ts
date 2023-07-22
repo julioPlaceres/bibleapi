@@ -7,10 +7,12 @@ import { Location } from '../entity/Location';
 import { Material } from '../entity/Material';
 import { River } from '../entity/River';
 
+const joinRelations = ['author', 'historicalEvents', 'materials', 'locations', 'rivers'];
+
 // Get all Books
 export const getBooks = async (req: Request, res: Response) => {
     const booksRepository = getRepository(Book);
-    const books = await booksRepository.find();
+    const books = await booksRepository.find({ relations: joinRelations });
     res.json(books);
 };
 
@@ -25,7 +27,7 @@ export const getBook = async (req: Request, res: Response) => {
         return res.status(400).json({ message: 'Invalid book id' });
     }
 
-    const book = await booksRepository.findOne({ where: { id: idNumber } });
+    const book = await booksRepository.findOne({ where: { id: idNumber }, relations: joinRelations });
 
     if (!book) {
         return res.status(404).json({ message: 'Book not found' });
@@ -102,7 +104,6 @@ export const createBook = async (req: Request, res: Response) => {
     const result = await booksRepository.save(newBook);
     res.status(201).json(result);
 };
-
 
 // Update a Book by id
 export const updateBook = async (req: Request, res: Response) => {
