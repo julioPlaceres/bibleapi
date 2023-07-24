@@ -4,6 +4,7 @@ import { Server } from 'http';
 import { Book } from './entity/Book';
 import { HistoricalEvent } from './entity/HistoricalEvent';
 import { Location } from './entity/Location';
+import { River } from './entity/River';
 // import { Character } from './entity/Character';
 
 let server: Server;
@@ -49,6 +50,17 @@ beforeAll(async () => {
     const locationRepository = connection.getRepository(Location);
     await locationRepository.save([location1, location2, location3]);
 
+    const river1 = new River();
+    const river2 = new River();
+    const river3 = new River();
+
+    river1.name = "Rivah";
+    river2.name = "Shanah";
+    river3.name = "DeNile";
+
+    const riverRepository = connection.getRepository(River);
+    await riverRepository.save([river1, river2, river3]);
+
     // const character1 = new Character();
     // const character2 = new Character();
     // const character3 = new Character();
@@ -91,7 +103,8 @@ afterEach(async () => {
 
     for (const entity of entities) {
         const repository = connection.getRepository(entity.name);
-        await repository.clear(); // Clear each table
+        
+        //await repository.clear(); // Clear each table
     }
 
     await connection.query('SET FOREIGN_KEY_CHECKS=1'); // enable foreign key checks
