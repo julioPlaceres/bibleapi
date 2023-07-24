@@ -19,13 +19,13 @@ export class Location {
     @Column({ type: "varchar" })
     name: string;
 
-    @Column({ type: "varchar" })
+    @Column({ type: "varchar", nullable: true })
     description: string;
 
-    @Column({ type: "varchar" })
+    @Column({ type: "varchar", nullable: true })
     geographicalLocation: string;
 
-    @Column({ type: "varchar" })
+    @Column({ type: "varchar", nullable: true })
     image: string;
 
     @ManyToMany(() => Material, (material) => material.sources)

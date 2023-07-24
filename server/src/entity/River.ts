@@ -17,10 +17,10 @@ export class River {
     @Column({ type: "varchar" })
     name: string;
 
-    @Column({ type: "varchar" })
+    @Column({ type: "varchar", nullable: true })
     description: string;
 
-    @Column({ type: "varchar" })
+    @Column({ type: "varchar", nullable: true })
     image: string;
 
     @ManyToMany(() => Location, (locations) => locations.rivers)
