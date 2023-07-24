@@ -3,6 +3,7 @@ import getExpressApp from './app';
 import { Server } from 'http';
 import { Book } from './entity/Book';
 import { HistoricalEvent } from './entity/HistoricalEvent';
+import { Location } from './entity/Location';
 // import { Character } from './entity/Character';
 
 let server: Server;
@@ -36,6 +37,17 @@ beforeAll(async () => {
 
     const eventRepository = connection.getRepository(HistoricalEvent);
     await eventRepository.save([event1, event2, event3]);
+
+    const location1 = new Location();
+    const location2 = new Location();
+    const location3 = new Location();
+
+    location1.name = "The Eden";
+    location2.name = "The New Jerusalem";
+    location3.name = "The Promise Land";
+
+    const locationRepository = connection.getRepository(Location);
+    await locationRepository.save([location1, location2, location3]);
 
     // const character1 = new Character();
     // const character2 = new Character();
