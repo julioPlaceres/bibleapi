@@ -5,6 +5,7 @@ import { Book } from './entity/Book';
 import { HistoricalEvent } from './entity/HistoricalEvent';
 import { Location } from './entity/Location';
 import { River } from './entity/River';
+import { Material } from './entity/Material';
 // import { Character } from './entity/Character';
 
 let server: Server;
@@ -60,6 +61,17 @@ beforeAll(async () => {
 
     const riverRepository = connection.getRepository(River);
     await riverRepository.save([river1, river2, river3]);
+
+    const material1 = new Material();
+    const material2 = new Material();
+    const material3 = new Material();
+
+    material1.name = "Ore";
+    material2.name = "Saphire";
+    material3.name = "Silver";
+
+    const materialRepository = connection.getRepository(Material);
+    await materialRepository.save([material1, material2, material3]);
 
     // const character1 = new Character();
     // const character2 = new Character();

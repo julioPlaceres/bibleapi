@@ -28,7 +28,7 @@ export class Location {
     @Column({ type: "varchar", nullable: true })
     image: string;
 
-    @ManyToMany(() => Material, (material) => material.sources)
+    @ManyToMany(() => Material, (material) => material.locations)
     materials: Material[];
 
     @ManyToMany(() => River, (river) => river.locations)

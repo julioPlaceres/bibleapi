@@ -28,3 +28,5 @@ yarn-error.log*
 # client
 /client/.env
 /client/node_modules
+server/dotenv
+server/reflect-metadata
