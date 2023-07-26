@@ -4,7 +4,7 @@ import eventsRoute from './eventRoutes';
 import locationRoute from './locationRoutes';
 import riverRoute from './riverRoutes';
 import materialRoute from './materialRoutes';
-// import charactersRoute from './characterRoutes';
+import charactersRoute from './characterRoutes';
 
 export default (app: Express) => {
     app.use('/books', booksRoute);
@@ -12,5 +12,5 @@ export default (app: Express) => {
     app.use('/locations', locationRoute);
     app.use('/rivers', riverRoute);
     app.use('/materials', materialRoute);
-    // app.use('/characters', charactersRoute);
+    app.use('/characters', charactersRoute);
 };

@@ -6,7 +6,7 @@ import { HistoricalEvent } from './entity/HistoricalEvent';
 import { Location } from './entity/Location';
 import { River } from './entity/River';
 import { Material } from './entity/Material';
-// import { Character } from './entity/Character';
+import { Character } from './entity/Character';
 
 let server: Server;
 
@@ -73,16 +73,16 @@ beforeAll(async () => {
     const materialRepository = connection.getRepository(Material);
     await materialRepository.save([material1, material2, material3]);
 
-    // const character1 = new Character();
-    // const character2 = new Character();
-    // const character3 = new Character();
+    const character1 = new Character();
+    const character2 = new Character();
+    const character3 = new Character();
 
-    // character1.name = "Moses";
-    // character2.name = "Aaron";
-    // character3.name = "Joshua";
+    character1.name = "Moses";
+    character2.name = "Aaron";
+    character3.name = "Joshua";
 
-    // const characterRepository = connection.getRepository(Character);
-    // await characterRepository.save([character1, character2, character3]);
+    const characterRepository = connection.getRepository(Character);
+    await characterRepository.save([character1, character2, character3]);
 
     const app = await getExpressApp();
     server = app.listen();
@@ -116,7 +116,8 @@ afterEach(async () => {
     for (const entity of entities) {
         const repository = connection.getRepository(entity.name);
         
-        //await repository.clear(); // Clear each table
+        // Clear tables after Test
+       // await repository.clear();
     }
 
     await connection.query('SET FOREIGN_KEY_CHECKS=1'); // enable foreign key checks
