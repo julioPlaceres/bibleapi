@@ -19,25 +19,25 @@ export class Character {
   @Column({ type: "varchar" })
   name: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", nullable: true })
   gender: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", nullable: true })
   yearsLived: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", nullable: true })
   role: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", nullable: true })
   nameMeaning: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", nullable: true })
   married: boolean;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", nullable: true })
   image: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", nullable: true })
   otherNames: string;
 
   @Column({ nullable: true, type: "number" })

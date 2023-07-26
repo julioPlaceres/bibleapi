@@ -5,7 +5,8 @@ import { Book } from './entity/Book';
 import { HistoricalEvent } from './entity/HistoricalEvent';
 import { Location } from './entity/Location';
 import { River } from './entity/River';
-// import { Character } from './entity/Character';
+import { Material } from './entity/Material';
+import { Character } from './entity/Character';
 
 let server: Server;
 
@@ -61,16 +62,27 @@ beforeAll(async () => {
     const riverRepository = connection.getRepository(River);
     await riverRepository.save([river1, river2, river3]);
 
-    // const character1 = new Character();
-    // const character2 = new Character();
-    // const character3 = new Character();
+    const material1 = new Material();
+    const material2 = new Material();
+    const material3 = new Material();
 
-    // character1.name = "Moses";
-    // character2.name = "Aaron";
-    // character3.name = "Joshua";
+    material1.name = "Ore";
+    material2.name = "Saphire";
+    material3.name = "Silver";
 
-    // const characterRepository = connection.getRepository(Character);
-    // await characterRepository.save([character1, character2, character3]);
+    const materialRepository = connection.getRepository(Material);
+    await materialRepository.save([material1, material2, material3]);
+
+    const character1 = new Character();
+    const character2 = new Character();
+    const character3 = new Character();
+
+    character1.name = "Moses";
+    character2.name = "Aaron";
+    character3.name = "Joshua";
+
+    const characterRepository = connection.getRepository(Character);
+    await characterRepository.save([character1, character2, character3]);
 
     const app = await getExpressApp();
     server = app.listen();
@@ -104,7 +116,8 @@ afterEach(async () => {
     for (const entity of entities) {
         const repository = connection.getRepository(entity.name);
         
-        //await repository.clear(); // Clear each table
+        // Clear tables after Test
+       // await repository.clear();
     }
 
     await connection.query('SET FOREIGN_KEY_CHECKS=1'); // enable foreign key checks
