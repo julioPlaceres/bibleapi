@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client": "cd client && npm run dev",
-    "server": "cd server && node_modules\\.bin\\ts-node src/server.ts",
+    "server": "cd server && node_modules/.bin/ts-node src/server.ts",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "cd server && npm run test"
   },

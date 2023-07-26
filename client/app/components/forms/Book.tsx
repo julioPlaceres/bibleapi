@@ -3,23 +3,33 @@ import React, { useState, useEffect } from 'react';
 import TextBox from '../TextBox';
 import DropDown from '../Dropdown';
 
+interface DropDownOption {
+    label: string;
+    value: string;
+}
+
 const BookForm: React.FC = () => {
     const [bookName, setBookName] = useState('');
-    const [authors, setAuthor] = useState([]);
+    const [authors, setAuthor] = useState<DropDownOption[]>([]);
+    const [historicalEvents, setHistoricalEvent] = useState<DropDownOption[]>([]);
+    const [materials, setMaterial] = useState<DropDownOption[]>([]);
+    const [locations, setLocation] = useState<DropDownOption[]>([]);
+    const [rivers, setRiver] = useState<DropDownOption[]>([]);
 
     useEffect(() => {
-        console.log('useEffect');
-        console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
-        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/characters`)
-            .then(response => response.json())
-            .then(data => setAuthor(data.map((author: {name: string; id: number}) => ({ label: author.name, value: author.id }))))
-            .catch(error => console.error('Error:', error));
+        fetchData('characters', setAuthor);
+        fetchData('events', setHistoricalEvent);
+        fetchData('materials', setMaterial);
+        fetchData('locations', setLocation);
+        fetchData('rivers', setRiver);
     }, []);
 
-    const historicalEvents = [{ label: 'Event 1', value: '1' }]; // Fetch these from your API
-    const materials = [{ label: 'Material 1', value: '1' }]; // Fetch these from your API
-    const locations = [{ label: 'Location 1', value: '1' }]; // Fetch these from your API
-    const rivers = [{ label: 'River 1', value: '1' }]; // Fetch these from your API
+    const fetchData = (endpoint: string, setStateFunc: React.Dispatch<React.SetStateAction<any[]>>) => {
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${endpoint}`)
+        .then(response => response.json())
+        .then(data => setStateFunc(data.map((item: { name: string; id: number }) => ({ label: item.name, value: item.id }))))
+        .catch(error => console.error('Error:', error));
+    }
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
