@@ -18,15 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav>
-          <Link href="/form">
-            Form
-          </Link>
-          <Link href="/view-data">
-            View Data
-          </Link>
-        </nav>
-        {children}
+          <nav>
+            <Link href="/form">
+              Form
+            </Link>
+            <Link href="/view-data">
+              View Data
+            </Link>
+          </nav>
+          {children}
       </body>
     </html>
   )

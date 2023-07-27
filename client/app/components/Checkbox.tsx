@@ -14,3 +14,5 @@ const Checkbox: React.FC<CheckBoxProps> = ({ label, name, ...props }) => {
       </label>
     );
   }
+
+  export default Checkbox;
