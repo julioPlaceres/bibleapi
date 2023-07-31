@@ -8,10 +8,13 @@ interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Checkbox: React.FC<CheckBoxProps> = ({ label, name, ...props }) => {
     return (
-      <label>
+      <div className="mb-4 flex items-center">
+      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={name}>
         {label}
-        <input type="checkbox" name={name} {...props} />
+        <input id={name} type="checkbox" name={name} {...props} 
+        className="ml-2 leading-tight"/>
       </label>
+      </div>
     );
   }
 

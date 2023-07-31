@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import TextBox from '../TextBox';
 import DropDown from '../Dropdown';
+import SubmitButton from '../buttons/SubmitBtn';
 
 interface DropDownOption {
     label: string;
@@ -9,7 +10,15 @@ interface DropDownOption {
 }
 
 const BookForm: React.FC = () => {
-    const [bookName, setBookName] = useState('');
+    const [formData, setFormData] = useState({
+        name: '',
+        author: '',
+        historicalEvents: '',
+        materials: '',
+        locations: '',
+        rivers: ''
+      });
+    const [name, setName] = useState('');
     const [authors, setAuthor] = useState<DropDownOption[]>([]);
     const [historicalEvents, setHistoricalEvent] = useState<DropDownOption[]>([]);
     const [materials, setMaterial] = useState<DropDownOption[]>([]);
@@ -33,18 +42,29 @@ const BookForm: React.FC = () => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+
         // Call API to save the book
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/books`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        })
+        .then(response => response.json())
+        .then(data => console.log('Success:', data))
+        .catch((error) => console.error('Error:', error));
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <TextBox label="Book Name" name="name" value={bookName} onChange={e => setBookName(e.target.value)} />
+            <TextBox label="Book Name" name="name" value={name} onChange={e => setName(e.target.value)} />
             <DropDown label="Author" name="author" options={authors} />
             <DropDown label="Historical Events" name="historicalEvents" options={historicalEvents} />
             <DropDown label="Materials" name="materials" options={materials} />
             <DropDown label="Locations" name="locations" options={locations} />
             <DropDown label="Rivers" name="rivers" options={rivers} />
-            <button type="submit">Submit</button>
+            <SubmitButton label="submit"/>
         </form>
     );
 };

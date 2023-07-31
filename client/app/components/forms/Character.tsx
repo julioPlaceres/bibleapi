@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import TextBox from '../TextBox';
 import DropDown from '../Dropdown';
 import Checkbox from '../Checkbox';
+import SubmitButton from '../buttons/SubmitBtn';
 
 interface DropDownOption {
     label: string;
@@ -70,7 +71,7 @@ const CharacterForm: React.FC = () => {
             <DropDown label="Spouse" name="spouse" options={spouse} />
             <DropDown label="Events" name="events" options={historicalEvents} />
             <DropDown label="Books" name="books" options={books} />
-            <button type="submit">Submit</button>
+            <SubmitButton label="submit"/>
         </form>
     );
 };

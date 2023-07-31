@@ -1,9 +1,7 @@
-import RootLayout from './layout'
 import Link from 'next/link'
 
 export default function Home() {
   return (
-    <RootLayout>
     <main className="min-h-screen flex flex-col items-center justify-center p-24 bg-cover bg-center" style={{backgroundImage: 'url(/cross.jpg)' }}>
       <h1 className='text-4xl text-yellow-500 mb-6'>Welcome to the Bible API</h1>
         <p className='text-2xl text-red-600 mb-12'>Select a page to continue</p>
@@ -16,6 +14,5 @@ export default function Home() {
           </Link>
         </div>
     </main>
-    </RootLayout>
   )
 }
