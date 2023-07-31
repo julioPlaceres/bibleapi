@@ -9,7 +9,7 @@ export default function Home() {
           <Link href="/form" className="inline-block py-3 px-6 bg-yellow-500 hover:bg-red-500 text-white rounded mr-4 transition-colors">
             Form View
           </Link>
-          <Link href="/view-data" className="inline-block py-3 px-6 bg-yellow-500 hover:bg-red-500 text-white rounded transition-colors">
+          <Link href="/search" className="inline-block py-3 px-6 bg-yellow-500 hover:bg-red-500 text-white rounded transition-colors">
             Data View
           </Link>
         </div>

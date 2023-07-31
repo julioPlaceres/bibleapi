@@ -17,7 +17,7 @@ export class Book {
   id: number;
 
   @Column({ type: "varchar" })
-  name: string;
+  bookName: string;
 
   @ManyToOne(() => Character, character => character.booksWritten)
   author: Character;

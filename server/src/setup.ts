@@ -22,9 +22,9 @@ beforeAll(async () => {
     const book2 = new Book();
     const book3 = new Book();
 
-    book1.name = "Genesis";
-    book2.name = "Exodus";
-    book3.name = "Leviticus";
+    book1.bookName = "Genesis";
+    book2.bookName = "Exodus";
+    book3.bookName = "Leviticus";
 
     const bookRepository = connection.getRepository(Book);
     await bookRepository.save([book1, book2, book3]);
