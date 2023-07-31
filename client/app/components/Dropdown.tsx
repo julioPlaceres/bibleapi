@@ -9,9 +9,11 @@ interface DropDownProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 const DropDown: React.FC<DropDownProps> = ({ label, name, options, ...props }) => {
   return (
-    <label>
+    <div className='mb-4'>
+    <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={name}>
       {label}
-      <select name={name} {...props}>
+      <select id={name} name={name} {...props}
+      className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -19,6 +21,7 @@ const DropDown: React.FC<DropDownProps> = ({ label, name, options, ...props }) =
         ))}
       </select>
     </label>
+    </div>
   );
 };
 
