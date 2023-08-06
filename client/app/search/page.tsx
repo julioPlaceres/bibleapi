@@ -7,19 +7,83 @@ const itali = Italiana({
   subsets: ['latin'],
 })
 
+type Filter = {
+  fieldType: string;
+  fieldValue: string;
+};
+
 export default function Search() {
+  const entityTypes = ['Book', 'Character', 'Location'];
+  const fieldTypes = ['Name', 'Description', 'Author'];
+
+  const [currentFilters, setCurrentFilters] = useState<Filter[]>([]);
   const [filterSentence, setFilterSentence] = useState('');
+  const [entityType, setEntityType] = useState('Book');
+  const [fieldType, setFieldType] = useState('Name');
+  const [fieldValue, setFieldValue] = useState('');
 
   useEffect(() => {
-    setFilterSentence('I want to look for a verse that contains the word "love"');
-  }, []);
+    let sentence = `I want to look for a ${entityType} `;
+    currentFilters.forEach((filter, index) => {
+      sentence.includes("whose")
+        ?
+        sentence += `${index > 0 ? ' and ' : ''}"${filter.fieldType}" with a value of "${filter.fieldValue}"`
+        :
+        sentence += `whose "${currentFilters[0].fieldType}" contains "${currentFilters[0].fieldValue}"`;
+    });
+
+    setFilterSentence(sentence);
+  }, [currentFilters]);
+
+  const handleAdd = () => {
+    setCurrentFilters([...currentFilters, { fieldType, fieldValue }]);
+    setFieldType('');
+    setFieldValue('');
+  };
+
+  const removeFilter = (index: number) => {
+    const newFilters = [...currentFilters];
+    newFilters.splice(index, 1);
+    setCurrentFilters(newFilters);
+};
 
   return (
     <section className="min-h-screen flex flex-col items-center p-24 bg-cover bg-center" style={{ backgroundImage: 'url(/cross.jpg)' }}>
       <h1 className='text-2xl mb-5'>Search an entry</h1>
-      
+
       <div className='my-5'>
-        <h1 className={`text-4xl ${itali.className}`}>{filterSentence}</h1>
+
+        <select value={entityType}
+          onChange={e => setEntityType(e.target.value)}
+          className='mr-2'>
+          {entityTypes.map(type => <option key={type} value={type}>{type}</option>)}
+        </select>
+
+        <select value={fieldType}
+          onChange={e => setFieldType(e.target.value)}
+          className='mr-2'>
+          {fieldTypes.map(type => <option key={type} value={type}>{type}</option>)}
+        </select>
+
+        <input value={fieldValue}
+          onChange={e => setFieldValue(e.target.value)} />
+
+        <button className='ml-2 px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 transition duration-300'
+          onClick={handleAdd}>
+          Add
+        </button>
+
+        <h1 id='filterSentenceId' className={`text-4xl ${itali.className}`}>
+          {filterSentence}
+        </h1>
+
+        {currentFilters.map((filter, index) => (
+          <div className="px-2 bg-white text-black text-sm border border-gray-300 rounded-lg shadow-md cursor-pointer hover:bg-gray-100 mr-2 mb-2 w-20"
+            key={index}
+            onClick={() => removeFilter(index)}>
+            {filter.fieldValue.substring(0, 13)}
+          </div>
+        ))}
       </div>
     </section>
   )
