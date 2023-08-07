@@ -14,13 +14,14 @@ type Filter = {
 
 export default function Search() {
   const entityTypes = ['Book', 'Character', 'Location'];
-  const fieldTypes = ['Name', 'Description', 'Author'];
+  const fieldTypes = ['bookName', 'Description', 'Author'];
 
   const [currentFilters, setCurrentFilters] = useState<Filter[]>([]);
   const [filterSentence, setFilterSentence] = useState('');
   const [entityType, setEntityType] = useState('Book');
-  const [fieldType, setFieldType] = useState('Name');
+  const [fieldType, setFieldType] = useState('bookName');
   const [fieldValue, setFieldValue] = useState('');
+  const [searchResults, setSearchResults] = useState<any[]>([]);
 
   useEffect(() => {
     let sentence = `I want to look for a ${entityType} `;
@@ -32,8 +33,29 @@ export default function Search() {
         sentence += `whose "${currentFilters[0].fieldType}" contains "${currentFilters[0].fieldValue}"`;
     });
 
+    fetchData('search', setSearchResults);
+
     setFilterSentence(sentence);
   }, [currentFilters]);
+
+  const fetchData = (endpoint: string, setStateFunc: React.Dispatch<React.SetStateAction<any[]>>) => {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${endpoint}`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "entityType": entityType,
+        "filters": currentFilters,
+    }),    
+    })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          setStateFunc(data);
+        })
+        .catch(error => console.error('Error:', error));
+}
 
   const handleAdd = () => {
     setCurrentFilters([...currentFilters, { fieldType, fieldValue }]);

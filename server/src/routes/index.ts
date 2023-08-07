@@ -5,6 +5,7 @@ import locationRoute from './locationRoutes';
 import riverRoute from './riverRoutes';
 import materialRoute from './materialRoutes';
 import charactersRoute from './characterRoutes';
+import searchRoute from './searchRoutes';
 
 export default (app: Express) => {
     app.use('/books', booksRoute);
@@ -13,4 +14,5 @@ export default (app: Express) => {
     app.use('/rivers', riverRoute);
     app.use('/materials', materialRoute);
     app.use('/characters', charactersRoute);
+    app.use('/search', searchRoute);
 };
