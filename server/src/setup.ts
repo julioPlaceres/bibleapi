@@ -115,9 +115,9 @@ afterEach(async () => {
 
     for (const entity of entities) {
         const repository = connection.getRepository(entity.name);
-        
+
         // Clear tables after Test
-       // await repository.clear();
+        // await repository.clear();
     }
 
     await connection.query('SET FOREIGN_KEY_CHECKS=1'); // enable foreign key checks

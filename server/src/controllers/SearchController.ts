@@ -7,6 +7,8 @@ import { Location } from '../entity/Location';
 // import { Material } from '../entity/Material';
 // import { River } from '../entity/River';
 
+const joinRelations = ['author', 'historicalEvents', 'materials', 'locations', 'rivers'];
+
 export const searchEntities = async (req: Request, res: Response) => {
     type Filter = {
         fieldType: string;
@@ -20,7 +22,6 @@ export const searchEntities = async (req: Request, res: Response) => {
 
     const { entityType, filters } = req.body as ReqBody;
 
-    // You'd need to set up logic to determine which repository to search in based on entityType
     let repository;
     switch (entityType) {
         case 'Book':
@@ -53,7 +54,7 @@ export const searchEntities = async (req: Request, res: Response) => {
     }
 
     const results = await repository.find({
-        where: query
+        where: query, relations: joinRelations
     });
 
     console.log('entityType: ', entityType);
