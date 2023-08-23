@@ -1,6 +1,7 @@
 import express from 'express';
 import { createConnection, getConnectionManager } from 'typeorm';
 import setupRoutes from './routes/index';
+import bodyParser from 'body-parser';
 const cors = require('cors');
 
 const createApp = async () => {
@@ -15,6 +16,7 @@ const createApp = async () => {
     app.use(cors());
 
     app.use(express.json()); // Enable JSON body parsing
+    app.use(bodyParser.json()); // Enable URL-encoded body parsing
     setupRoutes(app); // Setup routes
 
     return app;
