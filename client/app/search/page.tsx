@@ -28,6 +28,11 @@ export default function Search() {
       endpoint: string,
       setStateFunc: React.Dispatch<React.SetStateAction<any[]>>
     ) => {
+      console.log("fetching data");
+      console.log(currentFilters);
+      console.log(entityType);
+      console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${endpoint}`);
+      
       fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${endpoint}`, {
         method: "POST",
         headers: {
@@ -52,8 +57,7 @@ export default function Search() {
     let sentence = `I want to look for a ${entityType} `;
     currentFilters.forEach((filter, index) => {
       sentence.includes("whose")
-        ? (sentence += `${index > 0 ? " and " : ""}"${
-            filter.fieldType
+        ? (sentence += `${index > 0 ? " and " : ""}"${filter.fieldType
           }" with a value of "${filter.fieldValue}"`)
         : (sentence += `whose "${currentFilters[0].fieldType}" contains "${currentFilters[0].fieldValue}"`);
     });
@@ -84,8 +88,7 @@ export default function Search() {
     // Confirm before deleting
     if (window.confirm("Are you sure you want to delete this item?")) {
       fetch(
-        `${
-          process.env.NEXT_PUBLIC_API_BASE_URL
+        `${process.env.NEXT_PUBLIC_API_BASE_URL
         }/${endpoint.toLowerCase()}s/${id}`,
         {
           method: "DELETE",
@@ -171,22 +174,23 @@ export default function Search() {
 
       {/* Begin Table */}
       <table className="mt-5 w-full">
+      <colgroup>
+        <col style={{ width: '33%' }} />
+        <col style={{ width: '33%' }} />
+        <col style={{ width: '33%' }} />
+    </colgroup>
         <thead>
           <tr>
-            {/* Assuming you have these columns, add/remove as necessary */}
-            <th>ID</th>
-            <th>Name</th>
-            <th>Field Value</th>
-            <th>Actions</th>
+            <th className="text-left">ID</th>
+            <th className="text-left">Name</th>
+            <th className="text-left">Actions</th>
           </tr>
         </thead>
         <tbody>
           {searchResults.map((result) => (
             <tr key={result.id}>
-              {/* Assuming you have these columns, add/remove as necessary */}
               <td>{result.id}</td>
-              <td>{result.bookName}</td>
-              <td>{result.fieldValue}</td>
+              <td>{String(Object.values(result)[1])}</td>
               <td>
                 <button
                   className="px-4 py-2 bg-yellow-500 text-white font-bold rounded hover:bg-yellow-700 transition duration-300 mr-3"
