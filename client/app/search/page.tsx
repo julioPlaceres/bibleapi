@@ -113,6 +113,10 @@ export default function Search() {
     }
   };
 
+  const handleDetails = (id: number) => {
+
+  }
+
   return (
     <section
       className="min-h-screen flex flex-col items-center p-24 bg-cover bg-center"
@@ -203,6 +207,12 @@ export default function Search() {
                   onClick={() => handleDelete(entityType, result.id)}
                 >
                   Delete
+                </button>
+                <button
+                    className="px-4 py-2 bg-teal-500 text-white font-bold rounded hover:bg-teal-700 transition duration-300 ml-3"
+                    onClick={() => handleDetails(result.id)}
+                >
+                  View Details
                 </button>
               </td>
             </tr>
