@@ -18,7 +18,7 @@ export default function Home() {
           View Form
         </Link>
         <Link
-          href="/view-data"
+          href="/view-data/0"
           className="inline-block py-3 px-6 bg-yellow-500 hover:bg-red-500 text-white rounded mr-4 transition-colors"
         >
           View Data
