@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { Italiana } from "next/font/google";
+import { useRouter } from 'next/navigation';
 
 const itali = Italiana({
   weight: "400",
@@ -13,6 +14,8 @@ type Filter = {
 };
 
 export default function Search() {
+  const router = useRouter();
+
   const entityTypes = ["Book", "Character", "Location"];
   const fieldTypes = ["bookName", "Description", "Author"];
 
@@ -28,11 +31,6 @@ export default function Search() {
       endpoint: string,
       setStateFunc: React.Dispatch<React.SetStateAction<any[]>>
     ) => {
-      console.log("fetching data");
-      console.log(currentFilters);
-      console.log(entityType);
-      console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${endpoint}`);
-      
       fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${endpoint}`, {
         method: "POST",
         headers: {
@@ -45,7 +43,7 @@ export default function Search() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Success:", data);
+          console.log("Success");
           setStateFunc(data);
         })
         .catch((error) => console.error("Error:", error));
@@ -114,7 +112,7 @@ export default function Search() {
   };
 
   const handleDetails = (id: number) => {
-
+    router.push(`/view-data/${id}`);
   }
 
   return (

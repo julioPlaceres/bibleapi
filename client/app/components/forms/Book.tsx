@@ -40,8 +40,6 @@ const BookForm: React.FC = () => {
     }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        console.log(event.target.name);
-        console.log(event.target.value);
         setFormData({
             ...formData,
             [event.target.name]: event.target.value,
@@ -61,7 +59,7 @@ const BookForm: React.FC = () => {
           body: JSON.stringify(formData),
         })
         .then(response => response.json())
-        .then(data => console.log('Success:', data))
+        .then(data => console.log('Success'))
         .catch((error) => console.error('Error:', error));
     };
 
