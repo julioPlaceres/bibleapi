@@ -46,7 +46,7 @@ const NavBar = () => {
               View Form
             </Link>
             <Link
-              href="/view-data"
+              href="/view-data/0"
               className="block mt-4 sm:inline-block sm:mt-0 text-teal-200 hover:text-white mr-4"
             >
               View Data
