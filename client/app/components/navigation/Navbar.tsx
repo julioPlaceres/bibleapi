@@ -7,7 +7,6 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleMenu() {
-    console.log("toggleMenu");
     setIsOpen(!isOpen);
   }
 

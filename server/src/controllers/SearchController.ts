@@ -41,7 +41,7 @@ export const searchEntities = async (req: Request, res: Response) => {
     let query: { [key: string]: any } = {};
 
     if (filters && Array.isArray(filters)) {
-        console.log(filters);
+        // console.log(filters);
 
         filters.forEach(filter => {
             query[filter.fieldType] = filter.fieldValue;
@@ -56,11 +56,6 @@ export const searchEntities = async (req: Request, res: Response) => {
     const results = await repository.find({
         where: query, relations: joinRelations
     });
-
-    console.log('entityType: ', entityType);
-    console.log('query: ', query);
-    console.log('filters: ', filters);
-    console.log(results);
 
     res.json(results);
 };

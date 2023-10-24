@@ -46,8 +46,6 @@ export const createBook = async (req: Request, res: Response) => {
     const booksRepository = getRepository(Book);
     const fields = extractFieldsFromRequest(req);
 
-    console.log(fields);
-
     // Required fields
     if (!fields.bookName) {
         return res.status(400).json({ message: 'Book Name is required' });
