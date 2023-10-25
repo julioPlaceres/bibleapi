@@ -7,7 +7,7 @@ import { Location } from '../entity/Location';
 // import { Material } from '../entity/Material';
 // import { River } from '../entity/River';
 
-const joinRelations = ['author', 'historicalEvents', 'materials', 'locations', 'rivers'];
+let joinRelations: string[] = [];
 
 export const searchEntities = async (req: Request, res: Response) => {
     type Filter = {
@@ -26,9 +26,11 @@ export const searchEntities = async (req: Request, res: Response) => {
     switch (entityType) {
         case 'Book':
             repository = getRepository(Book);
+            joinRelations = ['author', 'historicalEvents', 'materials', 'locations', 'rivers'];
             break;
         case 'Character':
             repository = getRepository(Character);
+            joinRelations = ['father', 'mother', 'childrenFromFather', 'childrenFromMother', 'siblings', 'spouse', 'spouseOf', 'historicalEvents', 'booksWritten']
             break;
         case 'HistoricalEvent':
             repository = getRepository(HistoricalEvent);
@@ -41,8 +43,6 @@ export const searchEntities = async (req: Request, res: Response) => {
     let query: { [key: string]: any } = {};
 
     if (filters && Array.isArray(filters)) {
-        // console.log(filters);
-
         filters.forEach(filter => {
             query[filter.fieldType] = filter.fieldValue;
         });
