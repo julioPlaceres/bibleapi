@@ -4,7 +4,7 @@ module.exports = {
   port: 3306,
   username: process.env.TYPEORM_USERNAME,
   password: process.env.TYPEORM_PASSWORD,
-  database: process.env.TYPEORM_DATABASE,
+  database: process.env.TYPEORM_DATABASETEST,
   synchronize: true,
   logging: false,
   entities: [process.env.TYPEORM_ENTITIES],

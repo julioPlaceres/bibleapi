@@ -77,9 +77,8 @@ export default function Search() {
     setCurrentFilters(newFilters);
   };
 
-  const handleUpdate = (item: any) => {
-    // Use item to pre-fill your update form
-    // You could use a modal to show the update form, or navigate to another page with the item data.
+  const handleUpdate = (id: number) => {
+    router.push(`/form/${entityType.toLowerCase()}/${id}`);
   };
 
   const handleDelete = (endpoint: string, id: number) => {
@@ -196,7 +195,7 @@ export default function Search() {
               <td>
                 <button
                   className="px-4 py-2 bg-yellow-500 text-white font-bold rounded hover:bg-yellow-700 transition duration-300 mr-3"
-                  onClick={() => handleUpdate(result)}
+                  onClick={() => handleUpdate(result.id)}
                 >
                   Update
                 </button>
