@@ -40,7 +40,7 @@ const NavBar = () => {
         >
           <div className="text-sm sm:flex-grow">
             <Link
-              href="/form"
+              href="/form/0"
               className="block mt-4 sm:inline-block sm:mt-0 text-teal-200 hover:text-white mr-4"
             >
               View Form

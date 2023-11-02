@@ -9,14 +9,25 @@ interface DropDownOption {
     value: string;
 }
 
-const BookForm: React.FC = () => {
+interface BookFormProps {
+    initialData?: {
+        bookName?: string;
+        author?: string;
+        historicalEvents?: string;
+        materials?: string;
+        locations?: string;
+        rivers?: string;
+    }
+}
+
+const BookForm: React.FC<BookFormProps> = ({initialData = {}}) => {
     const [formData, setFormData] = useState({
-        bookName: '',
-        author: '',
-        historicalEvents: '',
-        materials: '',
-        locations: '',
-        rivers: ''
+        bookName: initialData.bookName ||'',
+        author: initialData.author || '',
+        historicalEvents: initialData.historicalEvents || '',
+        materials: initialData.materials || '',
+        locations: initialData.locations || '',
+        rivers: initialData.rivers || ''
     });
     const [authors, setAuthor] = useState<DropDownOption[]>([{label: 'Select an Author', value: ''}]);
     const [historicalEvents, setHistoricalEvent] = useState<DropDownOption[]>([{label: 'Select an Event', value: ''}]);

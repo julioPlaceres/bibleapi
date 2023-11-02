@@ -1,9 +1,16 @@
 'use client';
-import React, { useState } from 'react';
-import BookForm from '../components/forms/Book';
-import CharacterForm from '../components/forms/Character';
 
-const Form: React.FC = () => {
+import React, { useState } from 'react';
+import BookForm from '../../components/forms/Book';
+import CharacterForm from '../../components/forms/Character';
+
+interface FormProps {
+    params: {
+      id: string;
+    };
+  }
+
+const Form: React.FC<FormProps> = ({params}) => {
   const [formType, setFormType] = useState<string>('');
 
   const handleFormTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -13,6 +20,7 @@ const Form: React.FC = () => {
   const renderForm = () => {
     switch (formType) {
       case 'book':
+        fetchData('books')
         return <BookForm />;
       case 'character':
         return <CharacterForm />;
@@ -20,6 +28,13 @@ const Form: React.FC = () => {
         return null;
     }
   }
+
+  const fetchData = (endpoint: string) => {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${endpoint}/${params.id}`)
+        .then(response => response.json())
+        .then(data => {console.log(data)})
+        .catch(error => console.error('Error:', error));
+}
 
   return (
     <div className="flex min-h-screen flex-col items-center p-24">

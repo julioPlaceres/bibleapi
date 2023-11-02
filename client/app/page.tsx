@@ -12,7 +12,7 @@ export default function Home() {
       <p className="text-2xl text-red-600 mb-12">Select a page to continue</p>
       <div className="flex">
         <Link
-          href="/form"
+          href="/form/0"
           className="inline-block py-3 px-6 bg-yellow-500 hover:bg-red-500 text-white rounded mr-4 transition-colors"
         >
           View Form
