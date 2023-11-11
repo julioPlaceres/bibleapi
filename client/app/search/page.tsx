@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { Italiana } from "next/font/google";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const itali = Italiana({
   weight: "400",
@@ -16,12 +16,12 @@ type Filter = {
 export default function Search() {
   const router = useRouter();
 
-  const entityTypes = ["Book", "Character", "Location"];
+  const entityTypes = ["books", "characters", "locations"];
   const fieldTypes = ["bookName", "Description", "Author"];
 
   const [currentFilters, setCurrentFilters] = useState<Filter[]>([]);
   const [filterSentence, setFilterSentence] = useState("");
-  const [entityType, setEntityType] = useState("Book");
+  const [entityType, setEntityType] = useState("books");
   const [fieldType, setFieldType] = useState("bookName");
   const [fieldValue, setFieldValue] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -55,7 +55,8 @@ export default function Search() {
     let sentence = `I want to look for a ${entityType} `;
     currentFilters.forEach((filter, index) => {
       sentence.includes("whose")
-        ? (sentence += `${index > 0 ? " and " : ""}"${filter.fieldType
+        ? (sentence += `${index > 0 ? " and " : ""}"${
+            filter.fieldType
           }" with a value of "${filter.fieldValue}"`)
         : (sentence += `whose "${currentFilters[0].fieldType}" contains "${currentFilters[0].fieldValue}"`);
     });
@@ -78,14 +79,15 @@ export default function Search() {
   };
 
   const handleUpdate = (id: number) => {
-    router.push(`/form/${entityType.toLowerCase()}/${id}`);
+    router.push(`/form/${entityType}/${id}`);
   };
 
   const handleDelete = (endpoint: string, id: number) => {
     // Confirm before deleting
     if (window.confirm("Are you sure you want to delete this item?")) {
       fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL
+        `${
+          process.env.NEXT_PUBLIC_API_BASE_URL
         }/${endpoint.toLowerCase()}s/${id}`,
         {
           method: "DELETE",
@@ -112,7 +114,7 @@ export default function Search() {
 
   const handleDetails = (id: number) => {
     router.push(`/view-data/${id}`);
-  }
+  };
 
   return (
     <section
@@ -175,11 +177,11 @@ export default function Search() {
 
       {/* Begin Table */}
       <table className="mt-5 w-full">
-      <colgroup>
-        <col style={{ width: '33%' }} />
-        <col style={{ width: '33%' }} />
-        <col style={{ width: '33%' }} />
-    </colgroup>
+        <colgroup>
+          <col style={{ width: "33%" }} />
+          <col style={{ width: "33%" }} />
+          <col style={{ width: "33%" }} />
+        </colgroup>
         <thead>
           <tr>
             <th className="text-left">ID</th>
@@ -206,8 +208,8 @@ export default function Search() {
                   Delete
                 </button>
                 <button
-                    className="px-4 py-2 bg-teal-500 text-white font-bold rounded hover:bg-teal-700 transition duration-300 ml-3"
-                    onClick={() => handleDetails(result.id)}
+                  className="px-4 py-2 bg-teal-500 text-white font-bold rounded hover:bg-teal-700 transition duration-300 ml-3"
+                  onClick={() => handleDetails(result.id)}
                 >
                   View Details
                 </button>

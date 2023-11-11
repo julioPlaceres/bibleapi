@@ -16,7 +16,7 @@ export const searchEntities = async (req: Request, res: Response) => {
     };
 
     type ReqBody = {
-        entityType: 'Book' | 'Character' | 'HistoricalEvent' | 'Location';
+        entityType: 'books' | 'characters' | 'historicalEvents' | 'locations';
         filters: Filter[];
     };
 
@@ -24,18 +24,18 @@ export const searchEntities = async (req: Request, res: Response) => {
 
     let repository;
     switch (entityType) {
-        case 'Book':
+        case 'books':
             repository = getRepository(Book);
             joinRelations = ['author', 'historicalEvents', 'materials', 'locations', 'rivers'];
             break;
-        case 'Character':
+        case 'characters':
             repository = getRepository(Character);
             joinRelations = ['father', 'mother', 'childrenFromFather', 'childrenFromMother', 'siblings', 'spouse', 'spouseOf', 'historicalEvents', 'booksWritten']
             break;
-        case 'HistoricalEvent':
+        case 'historicalEvents':
             repository = getRepository(HistoricalEvent);
             break;
-        case 'Location':
+        case 'locations':
             repository = getRepository(Location);
             break;
     }
